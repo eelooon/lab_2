@@ -1,0 +1,364 @@
+#include <iostream>
+
+using namespace std;
+
+struct Home
+{
+    char country[50];
+    char city[50];
+    char homeAddress[100];
+};
+
+struct Date
+{
+    int day;
+    int month;
+    int year;
+};
+
+struct Buyer
+{
+    char surname[25];
+    char name[25];
+    char middleName[50];
+    char sex[10];
+    char nationality[50];
+    int height;
+    int weight;
+    Date birthday;
+    Home address;
+    int phoneNumber;
+    int creditСard;
+    int bankAccountNumber;
+    void readinfo();
+    void infoinfo();
+    void newrecording();
+
+};
+
+
+void Buyer::infoinfo()
+{
+    
+    cout << endl << "Name:" << name << endl;
+    cout << "Surname:" << surname << endl;
+    cout << "Middle name:" << middleName << endl;
+    cout << "Gender:" << sex << endl;
+    cout << "Nationality:" << nationality << endl;
+    cout << "Heigth:" << height << endl;
+    cout << "Weigth:" << weight << endl;
+    cout << "Credit card:" << creditСard << endl;
+    cout << "Bank account number:" << bankAccountNumber << endl;
+    cout << "Birthday:" << birthday.day << birthday.month << birthday.year << endl<<endl;
+    cout << "Home address" << endl<<endl;
+    cout << "Country:" << address.country << endl;
+    cout << "City:" << address.city << endl;
+    cout << "Address:" << address.homeAddress << endl;
+
+    cout << "----------------------------------------------------------"<<endl;
+
+
+}
+
+bool dd(char* p1, char* p2)
+{
+    int i = 0;
+    while (true)
+    {
+        if (p1[i] == p2[i])
+            i++;
+        else
+        {
+            return false;
+            break;
+        }
+        if (p1[i] == '\0' || p2[i] == '\0')
+            break;
+    }
+    return true;
+
+}
+
+void Buyer::readinfo()
+{
+    char stopword[] = "Volondemort";
+
+    int a = 0;
+    do
+    {
+
+        cout << "Input buyer name: ";
+        cin.ignore(std::cin.rdbuf()->in_avail());
+        cin.getline(name, sizeof(name));
+        bool a = dd(name, stopword);
+
+
+    } while (dd(name, stopword));
+
+
+    cout << "Input buyer surname: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(surname, sizeof(surname));
+
+    cout << "Input buyer middle name: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(middleName, sizeof(middleName));
+
+    cout << "Input buyer gender: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(middleName, sizeof(middleName));
+
+    cout << "Input buyer nationality: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(nationality, sizeof(nationality));
+
+    cout << "Input buyer heigth: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> height;
+
+    cout << "Input buyer weigth: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> weight;
+
+    cout << "Input buyer phone number: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> phoneNumber;
+
+    cout << "Input buyer credit card: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> creditСard;
+
+    cout << "Input buyer bank account number: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> bankAccountNumber;
+
+    cout << "Input buyer birthday: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> birthday.day >> birthday.month >> birthday.year;
+
+    cout << "Input home address"<<endl;
+
+    cout << "Input buyer country : ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(address.country, sizeof(address.country));
+
+    cout << "Input buyer city: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(address.city, sizeof(address.city));
+
+    cout << "Input buyer address: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(address.homeAddress, sizeof(address.homeAddress));
+
+}
+
+void newrecording(Buyer* p3, int a, int d)
+{
+    do
+    {
+        cout << endl << "Do you want to enter more data? YES - 1 or NO - 0: " << endl;
+        cin >> d;
+        if (d == 1)
+        {
+            Buyer* newBuyer = new Buyer[a + 1];
+            for (int i = 0; i <= a; i++)
+            {
+                newBuyer[i] = p3[i];
+            }
+            p3 = newBuyer;
+            p3[a].readinfo();
+        }
+        a++;
+    } while (d != 0);
+
+}    // не передаёт а
+
+void finfo(Buyer* p3, int a)
+{
+    for (size_t i = 0; i < a - 1; i++)
+    {
+        p3[i].infoinfo();
+        cout << endl;
+    }
+
+}
+
+void poisk(char* pword, Buyer* p3, int a)
+{
+    for (size_t i = 0; i < a; i++)
+    {
+
+    }
+
+}
+
+void sortirovka(int sort, int a, Buyer* pBuyer)
+{
+    if (sort == 2)
+    {
+        do
+        {
+            int count = 0;
+            for (size_t i = 0; i < a - 1; i++)
+            {
+
+                if (pBuyer[i].weight < pBuyer[i + 1].weight)
+                {
+
+                    Buyer temp = pBuyer[i];
+                    pBuyer[i] = pBuyer[i + 1];
+                    pBuyer[i + 1] = temp;
+                    count++;
+                }
+
+            }
+            if (count == 0)
+                break;
+        } while (true);
+        for (size_t i = 0; i < a - 1; i++)
+        {
+            pBuyer[i].infoinfo();
+        }
+    }
+    if (sort == 1)
+    {
+        do
+        {
+            int count = 0;
+            for (size_t i = 0; i < a - 1; i++)
+            {
+
+                if (pBuyer[i].weight < pBuyer[i + 1].weight)
+                {
+
+                    Buyer temp = pBuyer[i];
+                    pBuyer[i] = pBuyer[i + 1];
+                    pBuyer[i + 1] = temp;
+                    count++;
+                }
+
+            }
+            if (count == 0)
+                break;
+        } while (true);
+        for (size_t i = 0; i < a - 1; i++)
+        {
+            pBuyer[i].infoinfo();
+        }
+
+    }
+
+}
+
+void task11()
+{
+    int d = 0, a, i = 0;
+    char word[50];
+    cout << "Enter the number of buyers:";
+    cin >> a;
+    Buyer* newBuyer = new Buyer[a];
+    for (size_t i = 0; i < a; i++)
+    {
+        newBuyer[i].readinfo();
+        cout << endl;
+    }
+    do
+    {
+        cout << endl << "Do you want to enter more data? YES - 1 or NO - 0: " << endl;
+        do
+        {
+            cin >> d;
+            if (d == 1 || d == 0)
+                break;
+            else
+                cout << "Input error, try again: " << endl;
+        } while (true);
+        if (d == 1)
+        {
+            Buyer* newEntry = new Buyer[a + 1];
+            for (int i = 0; i <= a; i++)
+            {
+                newEntry[i] = newBuyer[i];
+            }
+            newBuyer = newEntry;
+            newBuyer[a].readinfo();
+        }
+        a++;
+    } while (d != 0);
+    finfo(newBuyer, a);
+
+    cout << endl << "Type the item you want to find: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(word, sizeof(word));
+    for (size_t i = 0; i < a; i++)
+    {
+        if (dd(newBuyer[i].address.city, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+        if (dd(newBuyer[i].address.country, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].address.homeAddress, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].middleName, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].name, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].surname, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].nationality, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+
+        if (dd(newBuyer[i].sex, word) == true)
+        {
+            newBuyer[i].infoinfo();
+            break;
+        }
+    }
+
+    int sort;
+    cout << "Do you want sort structure? by height - 1 or,  by weith - 2 , NO - 0: ";
+    do
+    {
+        cin.ignore(std::cin.rdbuf()->in_avail());
+        cin >> sort;
+        if (sort == 1 || sort == 2 || sort == 0)
+            break;
+        else
+            cout << "Input error, try again: " << endl;
+    } while (true);
+    sortirovka(sort, a, newBuyer);
+    cout << "End";
+
+}
+
+int main()
+{
+    cout << "Enter buyers" << endl;
+    task11();
+
+}
